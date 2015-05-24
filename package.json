@@ -1,0 +1,15 @@
+{
+    "name": "nodeIntro",
+    "version": "0.0.1",
+    "description": "description goes here!",
+    "author": {
+        "name": "Alejandro Perez",
+        "url": "http://github.com/alejandroperezmartin"
+        },
+        "dependencies": {
+            "express": "*",
+            "body-parser": "*",
+            "multer": "*",
+            "jade": "*"
+        }
+}
