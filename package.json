@@ -1,13 +1,14 @@
 {
-    "name": "nodeIntro",
-    "version": "0.0.1",
-    "description": "description goes here!",
+    "name": "nodejs-test",
+    "version": "1.0.0",
+    "description": "NodeJS app for testing using Express and Jade templating engine",
     "author": {
         "name": "Alejandro Perez",
         "url": "http://github.com/alejandroperezmartin"
         },
         "dependencies": {
             "express": "*",
+            "express-validator": "*",
             "body-parser": "*",
             "multer": "*",
             "jade": "*"

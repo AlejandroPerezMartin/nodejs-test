@@ -21,22 +21,27 @@ html
 
                 div( class="panel-body" )
 
+                    - if (fieldErrors)
+                        div( class="alert alert-danger" )
+                            - each error in fieldErrors
+                                p= error.msg
+
                     form( action="/settings/profile", method="post" )
 
                         div( class="form-group" )
 
                             label( for="name" ) Name:
-                            input( type="text", name="name", class="form-control" )
+                            input( type="text", name="name", class="form-control", autofocus, value=(fieldsData && fieldsData.name) ? fieldsData.name : "" )
 
                         div( class="form-group" )
 
                             label( for="surname" ) Surname:
-                            input( type="text", name="surname", class="form-control" )
+                            input( type="text", name="surname", class="form-control", value=(fieldsData && fieldsData.surname) ? fieldsData.surname : "" )
 
                         div( class="form-group" )
 
                             label( for="bio" ) Biography:
-                            textarea( name="bio", class="form-control", rows="3" )
+                            textarea( name="bio", class="form-control", rows="3", value=(fieldsData && fieldsData.bio) ? fieldsData.bio : "" )
 
                         div( class="form-group" )
                             input( type="submit", value="Submit", class="btn btn-primary" )
