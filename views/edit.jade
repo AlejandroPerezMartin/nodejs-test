@@ -26,12 +26,17 @@ html
                             - each error in fieldErrors
                                 p= error.msg
 
-                    form( action="/settings/profile", method="post" )
+                    form( action="/settings/profile", method="post", enctype="multipart/form-data" )
+
+                        div( class="form-group" )
+
+                            label( for="picture" ) Picture:
+                            input( type="file", name="picture", class="form-control" )
 
                         div( class="form-group" )
 
                             label( for="name" ) Name:
-                            input( type="text", name="name", class="form-control", autofocus, value=(fieldsData && fieldsData.name) ? fieldsData.name : "" )
+                            input( type="text", name="name", class="form-control", value=(fieldsData && fieldsData.name) ? fieldsData.name : "" )
 
                         div( class="form-group" )
 
@@ -41,7 +46,7 @@ html
                         div( class="form-group" )
 
                             label( for="bio" ) Biography:
-                            textarea( name="bio", class="form-control", rows="3", value=(fieldsData && fieldsData.bio) ? fieldsData.bio : "" )
+                            textarea( name="bio", class="form-control", rows="3", placeholder="Write about yourself, your hobbies, etc.", value=(fieldsData && fieldsData.bio) ? fieldsData.bio : "" )
 
                         div( class="form-group" )
                             input( type="submit", value="Submit", class="btn btn-primary" )

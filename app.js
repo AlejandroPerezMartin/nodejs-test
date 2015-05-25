@@ -9,12 +9,12 @@
 /**
  * MODULES
  */
-var express          = require("express"),
+var express = require("express"),
     expressValidator = require('express-validator'),
-    bodyParser       = require('body-parser'),
-    multer           = require('multer'),
-    fs               = require('fs'),
-    jade             = require("jade");
+    bodyParser = require('body-parser'),
+    multer = require('multer'),
+    fs = require('fs'),
+    jade = require("jade");
 
 // Initialize Express object
 var app = express();
@@ -28,9 +28,13 @@ var root = __dirname,
  */
 app.use(express.static(root + "/public"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(expressValidator());
-app.use(multer());
+app.use(multer({
+    dest: root + "/tmp/"
+}));
 
 app.set("views", root + "/views");
 app.set("view engine", "jade");
@@ -61,14 +65,25 @@ app.post("/settings/profile", function postEditProfileCb(req, res) {
     req.assert('surname', 'Surname field is required').notEmpty();
     req.assert('bio', 'Biography field is required').notEmpty();
 
-    var errors = req.validationErrors();
+    var errors = req.validationErrors(),
+        picture = req.files.picture;
+
+    if (picture == undefined) {
+        errors.unshift({
+            param: 'picture',
+            msg: 'Picture field is required',
+            value: undefined
+        });
+    }
+    else {
+        fs.renameSync(picture.path, root + "/public/images/" + picture.name);
+        req.body.picture = "/images/" + picture.name;
+    }
 
     if (!errors) {
         fs.writeFile('data.json', JSON.stringify(req.body, null, 2), function (err) {
 
             if (err) throw err;
-
-            console.log('Data was saved!');
 
             res.redirect("/profile");
         });
@@ -76,13 +91,13 @@ app.post("/settings/profile", function postEditProfileCb(req, res) {
     else {
         res.render("edit", {
             fieldErrors: errors,
-            fieldsData: req.body
+            fieldsData: req.body,
         });
     }
 
 });
 
-// Start server on port 3000
+/* Start server on port 3000 */
 app.listen(port, function listenCallback() {
     console.log("Express server is listening to port " + port);
     console.log("Browse to http://localhost:" + port);

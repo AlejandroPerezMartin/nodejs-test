@@ -5,3 +5,6 @@ NodeJS and Express simple test application using:
 - Express Validator
 - Jade
 - Bootstrap
+
+## Author
+Alejandro Perez Martin
