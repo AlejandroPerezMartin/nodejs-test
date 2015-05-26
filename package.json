@@ -5,12 +5,16 @@
     "author": {
         "name": "Alejandro Perez",
         "url": "http://github.com/alejandroperezmartin"
-        },
-        "dependencies": {
-            "express": "*",
-            "express-validator": "*",
-            "body-parser": "*",
-            "multer": "*",
-            "jade": "*"
-        }
+    },
+    "dependencies": {
+        "express": "*",
+        "express-validator": "*",
+        "body-parser": "*",
+        "multer": "*",
+        "jade": "*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/AlejandroPerezMartin/nodejs-test.git"
+    }
 }
